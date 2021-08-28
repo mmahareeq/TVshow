@@ -77,8 +77,9 @@ function addEpisode(data)
             let Image = document.createElement('img');
             let SE = document.createElement('span');
             let watchBtn=document.createElement('a');
-            
-            let newP = item.summary.substr(0,85);
+            let readMore = document.createElement('a');
+            let newP = item.summary.substr(0,200);
+
             //console.log(newP)
         // Film Name && number - Season 
          name_SE.classList.add('name-se');
@@ -110,14 +111,15 @@ function addEpisode(data)
             
             // add a summary 
             Summary.classList.add('summary-F')
-            desc.textContent="Description:"
-            
             Summary.innerHTML= newP;
-            Summary.classList.add('summary-F')
-            desc.textContent="Description:"
+            Summary.classList.add('summary-F');
+            readMore.className="link-summary";
+            readMore.textContent="Read More";
+
+            Summary.appendChild(readMore);
             // section watch_now 
             watchBtn.textContent="Watch now";
-            watchBtn.setAttribute('href',item.url)
+            watchBtn.setAttribute('href',item.url);
             // add to seation 
             name_SE.appendChild(filmName);
             name_SE.appendChild(SE);
