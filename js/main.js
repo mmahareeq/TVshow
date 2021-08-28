@@ -1,4 +1,4 @@
-let url = "https://api.tvmaze.com/shows/2/episodes"
+let url = "https://api.tvmaze.com/shows/10/episodes"
 let wrapper =document.querySelector('.wrapper');
 let showList = document.querySelector('#shows');
 let Page = document.querySelector('.pages');
@@ -153,21 +153,55 @@ function page(){
 }
 pre.addEventListener('click',()=>
 {
-   // current ==> first child of btnn 
-   let currentPage =Page.firstChild.id;
+    countern--
+    p--;
+    console.log(countern);
+  if(countern ===11)
+  
+  {   
+      document.querySelector(`#item${p+1}`).classList.remove('btn-primary');
+      
+      for(let i =0 ; i < Page.children.length;i++)
+      {
+           console.log(Page.children[i].innerHTML)
+           Page.children[i].id="item"+(parseInt(Page.children[i].innerHTML) -10);
+           Page.children[i].textContent =parseInt(Page.children[i].innerHTML) -10 ;
+           if(i==0)
+           {  
+              Page.children[i].classList.add('btn-primary');
+              
+           }
+      }
+      let start = (p +1 )* perPage;
+      let end = start + perPage;
+      addEpisode(episodes.slice(start,end));
+      countern=1;
+      
+  }else if((p)===(totalPages))
+  {
+      //console.log(document.querySelector(`#item${p}`).nextSibling.innerHTML);
 
-   console.log(currentPage);
-   if(currentPage >1)
-   {
-       for(let i =0 ; i < Page.children.length;i++)
-        {
-             console.log(Page.children[i].innerHTML)
-             Page.children[i].textContent = Page.children[i].innerHTML -1 ;
-        }
-       currentPage-=10;
-   }
-   
+      for(let i = 10 ; i >= countern ; i--)
+      {
+          Page.children[i-1].remove();
+          next.remove();
+      }
+  }
+  else{
+  
+  
+  console.log(`p=${p}`)
+  let h = document.querySelector(`#item${p+1}`);
+  h.classList.remove('btn-primary');
+  
+  let new1 = document.querySelector(`#item${p}`);
+  new1.classList.add('btn-primary');
+  let start = (p -1 )* perPage;
+  let end = start + perPage;
+  addEpisode(episodes.slice(start,end));
+  console.log(episodes.length)
 
+  }
 })
  next.addEventListener('click',()=>
 {     countern++;
@@ -219,30 +253,6 @@ pre.addEventListener('click',()=>
     console.log(episodes.length)
 
     }
-
-
-
-
-  
-
-
-
-    let maxPage = Page.lastChild.id;
-    
-      for(let i =0 ; i < Page.children.length;i++)
-        {   if(Page.children[i].id <= totalPages ){
-                console.log("true")
-                console.log(Page.children[i].id)
-                Page.children[i].id=parseInt(Page.children[i].id)+10;
-                Page.children[i].textContent = parseInt(Page.children[i].innerHTML) + 10;
-
-            }
-            else if(Page.children[i].id === totalPages){
-                Page.removeChild(Page.children[i]);
-                console.log("hello");
-            }
-        }
-       
    
    
    
