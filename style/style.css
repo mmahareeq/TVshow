@@ -13,26 +13,60 @@ body
     flex-direction: row;
     margin-top: 20px;
 }
-h5{
+h5,h2{
     padding:8px 16px;
     color:hsl(38, 94%, 51%);
 }
-section 
+a{
+    color:white;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 13px;
+    width:150px;
+    height:40px;
+    font-size: 18px;
+    background-color:hsl(38, 94%, 51%) ;
+}
+select
+{
+    height: 40px;
+    width:450px;
+}
+i{
+    color:white;
+}
+.wrapper
 {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-   
+    margin-top: 12px;
     
+}
+.pagination
+{
+    display: flex;
+    flex-direction:row;
+}
+
+.btn
+{
+    display: flex;
+    width: 40px;
+    height: 30px;
+    margin:1px;
+    text-align: center;
+    color:white;
 }
 
 .wrapper_ep
 {
     width:23%;
-    height:420px;
+    height:440px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction:column;
+    justify-content:center;
     border: 0.4px solid rgb(182, 180, 180);
     margin: 12px 12px 0px 0px;
     position: relative;
@@ -53,7 +87,7 @@ section
 .name-se h3
 {
     width:200px;
-    font-size: 18px;
+    font-size: 20px;
     color:hsl(38, 94%, 51%);
 }
 .name-se span
@@ -70,6 +104,7 @@ img{
     
     
 }
+
 .summary-F
 {
     white-space: pre-wrap;
@@ -91,8 +126,30 @@ img{
     opacity: 1;
     background-color: red;
   }
+.select-ep
+{
+    display:flex;
+    flex-direction:column ;
+}
 
+.backshow
+{   
+    width:180px;
+    height:55px;
+    color:white;
+    background-color: hsl(38, 94%, 51%);
+    border:none;
+    font-size: 18px;
+    margin-top: 12px;;
+    
 
+}
+#nameMovie
+{
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 900;
+}
 
 
 

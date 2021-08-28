@@ -5,33 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=
     , initial-scale=1.0">
+    <script src="https://use.fontawesome.com/23bea62652.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link  rel="stylesheet" href="style/style.css">
     <title>TV Show</title>
 </head>
 <body>
-    <header class="header container">
-        <h5>TV-SHOW</h5>
-        <ul class="nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Active</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
-          </ul>
+    <header class="header container justify-content-between align-items-center">
+        <h2 class="me-3">TV-SHOW</h2>
+        <form action="searchPage.html" method="GET">
+            <select id="shows" onchange="this.form.submit()"name="select"  >
+             </select>
+        
+          </form>
+          
     </header>
-    
+    <section class=" container pagination justify-content-end">
+       <button class="btn previous"><i class="fa fa-angle-double-left" aria-hidden="true" ></i></button>
+       <div class="pages row"></div>
+       <button class="btn next"><i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+    </section>
+
     <section class="wrapper container">
        
     </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="js/shows.js"></script>
+    
     <script src="js/main.js"></script>
 </body>
 </html>

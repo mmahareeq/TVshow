@@ -1,6 +1,20 @@
-let url = "https://api.tvmaze.com/shows/1/episodes"
-let wrapper =document.querySelector('.wrapper')
+let url = "https://api.tvmaze.com/shows/2/episodes"
+let wrapper =document.querySelector('.wrapper');
+let showList = document.querySelector('#shows');
+let Page = document.querySelector('.pages');
+let pre = document.querySelector('.previous');
+let next = document.querySelector('.next');
+let perPage = 10 ;
+let p=1;
+let totalPages  ;
+let countern = 1;
+
+ let shows;
+shows=[];
 let episodes=[];
+
+let special = [] ;
+
 
 function fetchEsipode()
 {  
@@ -17,16 +31,23 @@ function fetchEsipode()
                 season:item.season,
                 number:item.number,
                 summary:item.summary,
-                image:item.image.medium
+                image:{original:item.image.original},
             }
             
             episodes.push(epsiode);
             
             
         })
+        console.log(data)
+        page();
+        let start = (p -1 )* perPage;
+        let end = start + perPage;
+        addEpisode(data.slice(start,end));
+        //addEpisode(data);
+         
         
-        addEpisode(data);
         })
+    .catch(error=>window.alert(error));   
 }
 
 fetchEsipode(); 
@@ -38,13 +59,15 @@ fetchEsipode();
 function addEpisode(data)
 
 {       
-    
+         wrapper.innerHTML='';
+         wrapper.classList.remove("select-ep");
+         //let Div = document.createElement('div');
         data.map(item=>{
             // create a tags 
 
-            
             let Div = document.createElement('div');
             Div.classList.add('wrapper_ep');
+            Div.id=item.id;
             let watch_now = document.createElement('div');
             let icon_w= document.createElement('span');
             let name_SE = document.createElement('div');
@@ -53,6 +76,8 @@ function addEpisode(data)
             let desc = document.createElement('span');
             let Image = document.createElement('img');
             let SE = document.createElement('span');
+            let watchBtn=document.createElement('a');
+            
             let newP = item.summary.substr(0,85);
             //console.log(newP)
         // Film Name && number - Season 
@@ -78,9 +103,11 @@ function addEpisode(data)
             }
 
             SE.textContent= 'S'+newSeason+'E'+newNumber;
+            
+
             // add a image 
             Image.setAttribute('src',item.image.original);
-
+            
             // add a summary 
             Summary.classList.add('summary-F')
             desc.textContent="Description:"
@@ -89,36 +116,156 @@ function addEpisode(data)
             Summary.classList.add('summary-F')
             desc.textContent="Description:"
             // section watch_now 
-             icon_w.textContent="watch now "
-            watch_now.classList.add('fade-watch');
-            watch_now.appendChild(icon_w);
+            watchBtn.textContent="Watch now";
+            watchBtn.setAttribute('href',item.url)
             // add to seation 
             name_SE.appendChild(filmName);
             name_SE.appendChild(SE);
             Div.appendChild(name_SE);
             Div.appendChild(Image)
             Div.appendChild(Summary);
-            Div.appendChild(watch_now);
+            Div.appendChild(watchBtn);
             wrapper.appendChild(Div);
             
 
-         });   
-    
-
+         });
          
-}
 
-/*document.onreadystatechange = function() {
-    if (document.readyState !== "complete") {
-        console.log("heel")
-    }
-    else
-    {
-        console.log('mariam');
+         special=[];
+}
+function page(){
+    totalPages = Math.ceil(episodes.length/perPage)+1;
+
+    for (let i=0; i<10; i++) {   
+        let btnn = document.createElement('button');
+        let afterBtn = document.querySelector('after');
+        btnn.classList.add('btn');
+        btnn.id="item"+(i+1);
+        if(i==0){
+        btnn.classList.add('btn-primary')
+        }
+        btnn.textContent=i+1;
+        
+        Page.append(btnn);
         
 
     }
+}
+pre.addEventListener('click',()=>
+{
+   // current ==> first child of btnn 
+   let currentPage =Page.firstChild.id;
 
+   console.log(currentPage);
+   if(currentPage >1)
+   {
+       for(let i =0 ; i < Page.children.length;i++)
+        {
+             console.log(Page.children[i].innerHTML)
+             Page.children[i].textContent = Page.children[i].innerHTML -1 ;
+        }
+       currentPage-=10;
+   }
+   
+
+})
+ next.addEventListener('click',()=>
+{     countern++;
+      p++;
+      console.log(countern);
+    if(countern ===11)
     
+    {   
+        document.querySelector(`#item${p-1}`).classList.remove('btn-primary');
+        
+        for(let i =0 ; i < Page.children.length;i++)
+        {
+             console.log(Page.children[i].innerHTML)
+             Page.children[i].id="item"+(parseInt(Page.children[i].innerHTML) +10);
+             Page.children[i].textContent =parseInt(Page.children[i].innerHTML) +10 ;
+             if(i==0)
+             {  
+                Page.children[i].classList.add('btn-primary');
+                
+             }
+        }
+        let start = (p -1 )* perPage;
+        let end = start + perPage;
+        addEpisode(episodes.slice(start,end));
+        countern=1;
+        
+    }else if((p)===(totalPages))
+    {
+        //console.log(document.querySelector(`#item${p}`).nextSibling.innerHTML);
 
-    */
+        for(let i = 10 ; i >= countern ; i--)
+        {
+            Page.children[i-1].remove();
+            next.remove();
+        }
+    }
+    else{
+    
+    
+    console.log(`p=${p}`)
+    let h = document.querySelector(`#item${p-1}`);
+    h.classList.remove('btn-primary');
+    
+    let new1 = document.querySelector(`#item${p}`);
+    new1.classList.add('btn-primary');
+    let start = (p -1 )* perPage;
+    let end = start + perPage;
+    addEpisode(episodes.slice(start,end));
+    console.log(episodes.length)
+
+    }
+
+
+
+
+  
+
+
+
+    let maxPage = Page.lastChild.id;
+    
+      for(let i =0 ; i < Page.children.length;i++)
+        {   if(Page.children[i].id <= totalPages ){
+                console.log("true")
+                console.log(Page.children[i].id)
+                Page.children[i].id=parseInt(Page.children[i].id)+10;
+                Page.children[i].textContent = parseInt(Page.children[i].innerHTML) + 10;
+
+            }
+            else if(Page.children[i].id === totalPages){
+                Page.removeChild(Page.children[i]);
+                console.log("hello");
+            }
+        }
+       
+   
+   
+   
+})
+shows=getAllShows();
+shows.sort((a, b) => {
+    let fa = a.name.toLowerCase(),
+        fb = b.name.toLowerCase();
+
+    if (fa < fb) {
+        return -1;
+    }
+    if (fa > fb) {
+        return 1;
+    }
+    return 0;
+});
+shows.forEach((item)=>
+{
+    let list = document.createElement('option');
+    list.value=item.id;
+    
+    list.textContent=item.name;
+    
+    showList.appendChild(list);
+})
