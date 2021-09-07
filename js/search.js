@@ -11,14 +11,10 @@ let query ;
 
 
 window.addEventListener('load',()=>{
-    const loader = document.querySelector(".ring");
+    
     const cont = document.querySelectorAll(".container");
-    setTimeout(()=>{
-       
-        loader.style.display='none' // class "loader hidden"
-        cont.forEach(item=>item.style.visibility='visible');
-        
-    },1000)
+    cont.forEach(item=>item.style.visibility='visible');
+    
     
     const params = (new URL(document.location)).searchParams;
     let id =params.get('select');
