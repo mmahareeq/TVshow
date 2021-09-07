@@ -15,7 +15,18 @@ let episodes=[];
 
 let special = [] ;
 
-
+window.addEventListener("load", function () {
+    const loader = document.querySelector(".ring");
+    const cont = document.querySelectorAll(".container");
+    setTimeout(()=>{
+       
+        loader.style.display='none' // class "loader hidden"
+        cont.forEach(item=>item.style.visibility='visible');
+        
+    },3000)
+    
+    
+});
 function fetchEsipode()
 {  
     fetch(url)
