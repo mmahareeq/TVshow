@@ -11,7 +11,15 @@ let query ;
 
 
 window.addEventListener('load',()=>{
-
+    const loader = document.querySelector(".ring");
+    const cont = document.querySelectorAll(".container");
+    setTimeout(()=>{
+       
+        loader.style.display='none' // class "loader hidden"
+        cont.forEach(item=>item.style.visibility='visible');
+        
+    },1000)
+    
     const params = (new URL(document.location)).searchParams;
     let id =params.get('select');
     console.log(id);
@@ -136,7 +144,7 @@ function addEpisode(data)
             // add a image 
             if(item.image===null)
             {
-                Image.setAttribute('src','./placeholderImage.jpg')
+                Image.setAttribute('src','https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png?w=640')
             }
             else
             {
